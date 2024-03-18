@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{% endblock %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<!-- play movie container -->
+<div class="play-container container" id="play_page">
+  <img src="{{movie.poster_img.url}}" alt="" class="play-img" id="play_img">
+  <div class="play-text">
+    <h2 id="play_text">{{movie.title}}</h2>
+    <div class="rating" id="play_rating">
+      <i class="bx bxs-star"></i>
+      <i class="bx bxs-star"></i>
+      <i class="bx bxs-star"></i>
+      <i class="bx bxs-star"></i>
+      <i class="bx bxs-star-half"></i>
+    </div>
+    <div class="tags" id="play_tags">
+       {% for genre in movie.genre.all %}
+           <h4>{{ genre.name }}</h4>
+           {% if not forloop.last %}&nbsp;{% endif %}
+       {% endfor %}
+    </div>
+    <a href="{{movie.youtube_link}}" target="_blank" class="watch-btn" id="play_watch_btn">
+      <i class="bx bx-right-arrow"></i>
+      <span>Watch the trailer</span>
+    </a>
+    <div class="your-feedback" id="play_feedback">
+      <button class="open-button" onclick="OpenRatingForm()">Rate this Movie</button>
+                    <!-- <a href="" class="your-rating">Rate this Movie</a> -->
+                    <!-- <a href="" class="review">Review Movie</a> -->
+    </div>
+    <div class="rating_form" id="my_rating">
+      <form method="post">
+        {% csrf_token %}
+        <div class="feedback">
+            <p class="rate">Rate this Movie :&nbsp;&nbsp;&nbsp;{{review_form.rating}}</p>
+            <p class="rate">Comment :&nbsp;&nbsp;&nbsp;{{review_form.comment}}</p>
+<!--          <div class="emoji">-->
+<!--            <div id="emoji">-->
+<!--              <img src="{% static 'img\rating_emoji\very_poor.png' %}">-->
+<!--              <img src="{% static 'img\rating_emoji\poor.png' %}">-->
+<!--              <img src="{% static 'img\rating_emoji\okay.png' %}">-->
+<!--              <img src="{% static 'img\rating_emoji\good.png' %}">-->
+<!--              <img src="{% static 'img\rating_emoji\excellent.png' %}">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="rate-movie">-->
+<!--            <i class="fa-solid fa-star"></i>-->
+<!--            <i class="fa-solid fa-star"></i>-->
+<!--            <i class="fa-solid fa-star"></i>-->
+<!--            <i class="fa-solid fa-star"></i>-->
+<!--            <i class="fa-solid fa-star"></i>-->
+<!--          </div>-->
+<!--          <div class="comments">-->
+<!--            <input type="text" placeholder="Review this movie">-->
+<!--          </div>-->
+          <button type="submit" class="review_submit_btn" name="review" onclick="OpenThankYou()">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+    <div class="favourite">
+        {% if movie in favourites %}
+           <button class="fav"><i class='bx bxs-heart' style='color:#ff0000'></i></button>
+        {% else %}
+           <form action="{% url 'movieshallapp:add_to_favourites' movie.id %}" method="post">
+               {% csrf_token %}
+               <button class="fav" type="submit"><i class='bx bx-heart' style='color:#ff0000'></i></button>
+           </form>
+        {% endif %}
+    </div>
+</div>
+  <!-- thank you pop up -->
+  <div class="thank_you" id="thank_you_form">
+    <p>Thank You for rating this movie!</p>
+    <button type="submit" class="thank_you_btn" onclick="CloseThankYou()">Ok</button>
+  </div>
+
+<!-- See Reviews-->
+<div class="see_review" id="see_review_form1">
+    <button class="see_review_btn" onclick="OpenSeeReviewForm()">See Reviews</button>
+</div>
+<div class="see_review_form" id="see_reviews">
+    <div class="see_review_view_page">
+        <button class="see_review_close_btn" onclick="CloseSeeReviewForm()"><i class="bx bx-x">Close</i></button>
+        <!-- User's review -->
+        <div class="user_review">
+            {% if user_review %}
+               <h3>Your Review</h3>
+               <p>Your Rating :&nbsp;&nbsp;&nbsp;{{user_review.rating}}<i class="bx bxs-star"></i>/5</p>
+               <p>Your Comment :&nbsp;&nbsp;&nbsp;{{user_review.comment}}</p>
+           {% endif %}
+        </div>
+        <!-- Other users' reviews -->
+        <div class="other_users_review">
+            <h3>Other Reviews</h3>
+            {% for review in other_reviews %}
+               <p>Rating :&nbsp;&nbsp;&nbsp;{{review.rating}}<i class="bx bxs-star"></i>/5 &nbsp;&nbsp;&nbsp;by {{review.user}}</p>
+               <p>Comment :&nbsp;&nbsp;&nbsp;{{review.comment}}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- About this movie -->
+<div class="about-movie container">
+  <h2>{{movie.title}}</h2>
+  <div class="duration">
+    <p>{{movie.duration}}</p>
+    <div class="year">
+      <p>{{movie.release_date}}</p>
+    </div>
+  </div>
+  <p>{{movie.description}}</p>
+  <!-- Movie cast -->
+  <h2 class="cast-heading">Movie Cast</h2>
+  <div class="cast">
+    <div class="cast-box">
+      {% for cast in movie.casts.all %}
+        <img src="{{cast.img.url}}" alt="" class="cast-img">
+        <span class="cast-title">{{cast.name}}</span>
+        {% if not forloop.last %}&nbsp;{% endif %}
+      {% endfor %}
+    </div>
+<!--    <div class="cast-box">-->
+<!--      <img src="img/images (2).jpeg" alt="" class="cast-img">-->
+<!--      <span class="cast-title">Tom Cruise</span>-->
+<!--    </div>-->
+<!--    <div class="cast-box">-->
+<!--      <img src="img/images (2).jpeg" alt="" class="cast-img">-->
+<!--      <span class="cast-title">Tom Cruise</span>-->
+<!--    </div>-->
+<!--    <div class="cast-box">-->
+<!--      <img src="img/images (2).jpeg" alt="" class="cast-img">-->
+<!--      <span class="cast-title">Tom Cruise</span>-->
+<!--    </div>-->
+  </div>
+</div>
+<div class="update_or_delete">
+   {% if movie.added_by == request.user %}
+        <a href="{% url 'movieshallapp:update_movie' movie.id %}" class="update">Update</a>
+        <form action="{% url 'movieshallapp:delete_movie' movie.id %}" method="post">
+            {% csrf_token %}
+            <button class="delete" type="submit">Delete</button>
+        </form>
+   {% endif %}
+</div>
+{% endblock %}

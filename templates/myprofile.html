@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>My Profile</title>
+        <!-- css link -->
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+        <!-- box icons -->
+        <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+   </head>
+   <body>
+       <header>
+           <!-- nav -->
+           <div class="nav container">
+               <!-- logo -->
+               <a href="{% url 'movieshallapp:index' %}" class="logo">
+                   <i class="bx bx-camera-movie"></i>
+                    Movies<span>Hall</span>
+               </a>
+               <!-- nav bar -->
+               <div class="navbar">
+                   <a href="{% url 'movieshallapp:index' %}" class="nav-link nav-active">
+                       <i class="bx bx-home"></i>
+                       <span class="nav-link-title">Home</span>
+                   </a>
+                   <a href="{% url 'movieshallapp:index' %}" class="nav-link">
+                        <i class="bx bxs-hot"></i>
+                        <span class="nav-link-title">Trending</span>
+                   </a>
+                   <a href="{% url 'movieshallapp:index' %}" class="nav-link">
+                        <i class="bx bx-movie-play"></i>
+                        <span class="nav-link-title">Coming Soon</span>
+                   </a>
+                   <a href="category.html" class="nav-link">
+                        <i class="bx bx-category-alt"></i>
+                        <span class="nav-link-title">Category</span>
+                   </a>
+                   <a href="#home" class="nav-link">
+                        <i class="bx bx-heart"></i>
+                        <span class="nav-link-title">Favourite</span>
+                   </a>
+               </div>
+           </div>
+       </header>
+       <!--   My profile section-->
+       <div class="my_profile">
+           <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <h1>My Profile</h1>
+               <div class="my_profile_content">
+                   <h2 class="my_profile_box_name">First Name</h2>
+                   <div class="my_profile_box">
+                      <div class="my_profile_field">
+                         {{ form.first_name }}
+                      </div>
+                       <button class="update_btn1" type="button" onclick="toggleEdit('first_name')">Update</button>
+                   </div>
+               </div>
+               <div class="my_profile_content">
+                   <h2 class="my_profile_box_name">Last Name</h2>
+                   <div class="my_profile_box">
+                      <div class="my_profile_field">
+                         {{ form.last_name }}
+                      </div>
+                       <button class="update_btn1" type="button" onclick="toggleEdit('last_name')">Update</button>
+                   </div>
+               </div>
+               <div class="my_profile_content">
+                   <h2 class="my_profile_box_name">Username</h2>
+                   <div class="my_profile_box">
+                      <div class="my_profile_field">
+                         {{ form.username }}
+                      </div>
+                       <button class="update_btn1" type="button" onclick="toggleEdit('username')">Update</button>
+                   </div>
+               </div>
+                <div class="my_profile_content">
+                   <h2 class="my_profile_box_name">Email</h2>
+                   <div class="my_profile_box1">
+                      <div class="my_profile_field">
+                         {{ form.email }}
+                      </div>
+                       <button class="update_btn1" type="button" onclick="toggleEdit('email')">Update</button>
+                   </div>
+               </div>
+               <button class="save" type="submit">Save Changes</button>
+           </form>
+<!--            <a href="{% url 'movieshallapp:index' %}">&nbsp;Save&nbsp;Changes</a>-->
+       </div>
+
+       <!-- Copyright -->
+       <div class="copyright">
+          <p>&#169;Movieshall All Right Reserved.</p>
+       </div>
+       <!-- javascript link -->
+       <script src="{% static 'js/main.js' %}"></script>
+   </body>
+</html>

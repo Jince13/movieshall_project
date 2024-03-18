@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{% endblock %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<section class="category container" id="category">
+  <div class="movie-category">
+    <h2>Category</h2>
+      <form method="get" action="{% url 'movieshallapp:genre' %}">
+          {% csrf_token %}
+           <div class="category-search-box">
+             <input type="search" name="query" id="category-search-input" placeholder="Search movie genre">
+             <i class="bx bx-search"></i>
+           </div>
+      </form>
+    <nav class="gallery">
+       <div class="items">
+          <span class="item {% if selected_genre == 'All' %}active{% endif %}" data-name="all">All</span>
+          {% for genre in genres %}
+             <span class="item {% if selected_genre == genre.name %}active{% endif %}" data-name="{{genre.name}}">{{genre.name}}</span>
+          {% endfor %}
+       </div>
+    </nav>
+    <!-- Movies content -->
+    <div class="movies-card">
+      <!-- Movies card 3 -->
+        {% for i in movies %}
+           <div class="card">
+              <div class="poster">
+                 <img src="{{i.poster_img.url}}" alt=""style="width:400px; height:600px;">
+              </div>
+              <div class="details">
+                 <h2>{{i.title}}</h2>
+                 <a href="{{i.youtube_link}}" target="_blank" class="watch-btn play-btns">
+                    <i class="bx bx-right-arrow"></i>
+                 </a>
+                 <h3>Directed by {{i.director_name}}</h3>
+                 <div class="movie-rating">
+                     <i class="bx bxs-star"></i>
+                     <i class="bx bxs-star"></i>
+                     <i class="bx bxs-star"></i>
+                     <i class="bx bxs-star"></i>
+                     <i class="bx bxs-star-half"></i>
+                 </div>
+                 <div class="movie-tags">
+                     {% for genre in i.genre.all %}
+                        <span>{{genre.name}}</span>
+                        {% if not forloop.last %}&nbsp;{% endif %}
+                     {% endfor %}
+                 </div>
+                 <div class="movie-info">
+                     <p>{{i.description}}</p>
+                 </div>
+                 <div class="movie-cast">
+                     <h4>Cast</h4>
+                     <ul>
+                         {% for cast in i.casts.all %}
+                            <li><img src="{{cast.img.url}}"></li>
+                            {% if not forloop.last %}&nbsp;{% endif %}
+                         {% endfor %}
+                     </ul>
+                 </div>
+              </div>
+           </div>
+        {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

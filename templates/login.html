@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Login Page</title>
+        <!-- css link -->
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+        <!-- box icons -->
+        <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+
+    </head>
+    <body class="login-form">
+        <div class="login_page">
+            <form method="post">
+                {% csrf_token %}
+                <h1>Login Page</h1>
+                <div class="login-box">
+                    <div class="login-field">
+                        <i class="bx bxs-user"></i>
+                        <input type="text" id="username" name="username" placeholder="Username" required>
+                    </div>
+                    <div class="login-field">
+                        <i class="bx bxs-lock-alt"></i>
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                    </div>
+                </div>
+                <button type="submit" class="login_page_btn" on onclick="OpenWelcome()">Sign&nbsp;In</button>
+                <p>Don't have an account<a href="{% url 'registration' %}">&nbsp;&nbsp;Sign Up</a></p>
+            </form>
+            {% for msg1 in messages %}
+	           {{msg1}}
+	        {% endfor %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{% endblock %}
+{% block title %}
+{% endblock %}
+{% block content %}
+{% for i in home %}
+<!--home-->
+<section class="home container" id="home">
+    <!-- home image -->
+    <img src="{{i.img.url}}" alt="" class="home-img" style="width: 1068px; height: 470px;">
+    <!-- home text -->
+    <div class="home-text">
+        <h1 class="home-title">{{i.title}}</h1>
+        <p>Releasing on {{i.release_date}}</p>
+        <a href="{{i.youtube_link}}" target="_blank" class="watch-btn">
+            <i class="bx bx-right-arrow"></i>
+            <span>Watch the trailer</span>
+        </a>
+    </div>
+</section>
+{% endfor %}
+<!-- Home end -->
+<!-- popular section starts -->
+<section class="popular container" id="popular">
+    <!-- heading -->
+    <div class="heading">
+        <h2 class="heading-title">Popular Movies</h2>
+        <!-- Swiper buttons -->
+        <div class="swiper-btn">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+    <!-- content -->
+    <div class="popular-content swiper">
+        <div class="swiper-wrapper">
+            <!-- Movies Box 1 -->
+            {% for j in popular %}
+            <div class="swiper-slide">
+                <div class="movie-box">
+                    <img src="{{j.img.url}}" alt="" class="movie-box-img">
+                    <div class="box-text">
+                        <h2 class="movie-title">{{j.title}}</h2>
+                        <span class="movie-type">{{j.genre}}</span>
+                        <a href="{{j.youtube_link}}" target="_blank" class="watch-btn play-btn">
+                            <i class="bx bx-right-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- popular section ends -->
+<!-- Upcoming section starts -->
+<section class="movies container" id="movies">
+    <!-- heading -->
+    <div class="heading">
+        <h2 class="heading-title">Upcoming Movies</h2>
+    </div>
+    <!-- Movies content -->
+    <div class="movies-content">
+        <!-- Movies box 1 -->
+        {% for i in upcoming %}
+        <div class="movie-box">
+            <img src="{{i.img.url}}" alt="" class="movie-box-img">
+            <div class="box-text">
+                <h2 class="movie-title">{{i.title}}</h2>
+                <h3 class="movie_date">Releasing on {{i.release_date}} </h3>
+                <span class="movie-type">{{i.genre}}</span>
+                <a href="{{i.youtube_link}}" target="_blank" class="watch-btn play-btn">
+                    <i class="bx bx-right-arrow"></i>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- Upcoming section ends -->
+{% endblock %}

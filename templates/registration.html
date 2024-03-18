@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Registration Form</title>
+        <!-- css link -->
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+        <!-- box icons -->
+        <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+
+    </head>
+    <body class="register-form">
+        <div class="register">
+            <form method="post">
+                {% csrf_token %}
+                <h1>Registration Form</h1>
+                <div class="register-box">
+                    <div class="register-field">
+                        <input type="text" id="first_name" name="fname" placeholder="First name" required>
+                        <i class="bx bxs-user"></i>
+                    </div>
+                    <div class="register-field">
+                        <input type="text" id="last_name" name="lname" placeholder="Last name" required>
+                        <i class="bx bxs-user"></i>
+                    </div>
+                </div>
+                <div class="register-box">
+                    <div class="register-field">
+                        <input type="text" id="username" name="username" placeholder="Username" required>
+                        <i class="bx bxs-user"></i>
+                    </div>
+                    <div class="register-field">
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                        <i class="bx bxs-envelope"></i>
+                    </div>
+                </div>
+<!--                <div class="register-box">-->
+<!--                    <div class="register-field">-->
+<!--                        <input type="file" id="profile_img" name="profile_img">-->
+<!--                        <i class="bx bxs-image-alt"></i>-->
+<!--                    </div>-->
+<!--                    <div class="register-field">-->
+<!--                        <input type="date" id='date' name="dob" required>-->
+<!--                        <i class="bx bxs-calendar"></i>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="register-box">
+                    <div class="register-field">
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                        <i class="bx bxs-lock-alt"></i>
+                    </div>
+                    <div class="register-field">
+                        <input type="password" id="c_password" name="c_password" placeholder="Confirm Password" required>
+                        <i class="bx bxs-lock-alt"></i>
+                    </div>
+                </div>
+                <label><input type="checkbox" required>By signing up,you agree to MoviesHall's Terms of Services.</label>
+                <button type="submit" class="register-btn">Sign Up</button>
+            </form>
+            {% for msg in messages %}
+                <h2>{{msg}}</h2>
+            {% endfor %}
+        </div>
+    </body>
+</html>

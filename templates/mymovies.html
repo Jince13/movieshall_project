@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{% endblock %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<!-- Upcoming section starts -->
+<section class="movies container" id="movies">
+    <!-- heading -->
+    <div class="heading1">
+        <h2 class="heading-title">My Movies</h2>
+    </div>
+    <!-- Movies content -->
+    <div class="movies-content">
+        <!-- Movies box 1 -->
+        {% for i in movies %}
+        <div class="movie-box">
+            <img src="{{i.poster_img.url}}" alt="" class="movie-box-img">
+            <div class="box-text">
+                <h2 class="movie-title">{{i.title}}</h2>
+                <h3 class="movie_date">Releasing on &nbsp;{{i.release_date}}</h3>
+                <div class="genre">
+                    {% for genre in i.genre.all %}
+                     <h4>{{ genre.name }}</h4>
+<!--                     <span class="movie-type1"></span>-->
+                     {% if not forloop.last %}&nbsp;{% endif %}
+                  {% endfor %}
+                </div>
+
+                <a href="{% url 'movieshallapp:movie_details' i.id %}" class="watch-btn play-btn">
+                    <i class="bx bx-right-arrow"></i>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- Upcoming section ends -->
+{% endblock %}

@@ -1,0 +1,26 @@
+{% load static %}
+<div class="nav container">
+    <!-- nav bar -->
+    <div class="navbar">
+        <a href="{% url 'movieshallapp:index' %}" class="nav-link nav-active">
+            <i class="bx bx-home"></i>
+            <span class="nav-link-title">Home</span>
+        </a>
+        <a href="#popular" class="nav-link">
+            <i class="bx bxs-hot"></i>
+            <span class="nav-link-title">Trending</span>
+        </a>
+        <a href="#movies" class="nav-link">
+            <i class="bx bx-movie-play"></i>
+            <span class="nav-link-title">Coming Soon</span>
+        </a>
+        <a href="{% url 'movieshallapp:genre' %}" class="nav-link">
+            <i class="bx bx-category-alt"></i>
+            <span class="nav-link-title">Category</span>
+        </a>
+        <a href="{% url 'movieshallapp:favourites' %}" class="nav-link">
+            <i class="bx bx-heart"></i>
+            <span class="nav-link-title">Favourite</span>
+        </a>
+    </div>
+</div>

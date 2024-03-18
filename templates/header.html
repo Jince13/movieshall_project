@@ -1,0 +1,47 @@
+{% load static %}
+<header>
+  <!-- nav -->
+  <div class="nav container">
+    <!-- logo -->
+    <a href="{% url 'movieshallapp:index' %}" class="logo">
+      <i class="bx bx-camera-movie"></i>
+      Movies<span>Hall</span>
+    </a>
+    <!-- search bar -->
+    <form action="{% url 'movieshallapp:search_movies' %}" method="GET">
+        {% csrf_token %}
+        <div class="search-box">
+          <input type="search" name="query" id="search-input" placeholder="Search movie here">
+          <button type="submit" class="search"><i class="bx bx-search"></i></button>
+        </div>
+    </form>
+    <!-- user -->
+    {% if user.is_authenticated %}
+    <div class="navigation">
+      <div class="user-box">
+        <div class="user_img_box">
+          <img src="{% static 'img\user\user.jpg' %}" class="user_img">
+        </div>
+        <p class="username">{{user.username}}</p>
+        <!-- <div class="menuToggle">
+
+             </div> -->
+      </div>
+      <ul class="menu">
+        <li><a href="{% url 'myprofile' %}"><i class="bx bxs-user"></i>My Profile</a></li>
+        <li><a href="{% url 'movieshallapp:mymovies'%}"><i class="bx bx-movie-play"></i>My Movies</a></li>
+        <li><a href="{% url 'movieshallapp:addmovies'%}"><i class="bx bx-book-add"></i>Add Movies</a></li>
+        <li><a href=""><i class="bx bx-help-circle"></i>Help & Support</a></li>
+        <li><a href="{% url 'logout' %}"><i class="bx bx-log-out"></i>Logout</a></li>
+      </ul>
+    </div>
+     <!-- if not logged in -->
+    {% else %}
+    <div class="login">
+      <a href="{% url 'login' %}">
+        <button class="login_btn" id="login">Login</button>
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</header>

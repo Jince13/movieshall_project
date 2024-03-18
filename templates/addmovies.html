@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{% endblock %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<!--   Add Movies section-->
+<div class="add_movies">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Add Movies</h1>
+        <div class="add_movie_box">
+            <div class="add_movies_content">
+                <div class="add_movie_title">
+                    <h4>Movie Name</h4>
+                </div>
+                {{form.title}}
+            </div>
+            <div class="add_movies_content">
+                <div class="add_movie_title">
+                    <h4>Image</h4>
+                </div>
+                {{form.poster_img}}
+            </div>
+            <div class="add_movies_content">
+                <div class="add_movie_title">
+                    <h4>Description</h4>
+                </div>
+                {{form.description}}
+            </div>
+            <div class="add_movies_content">
+                <div class="add_movie_title">
+                    <h4>Release Date</h4>
+                </div>
+                {{form.release_date}}
+            </div>
+            <div class="add_movies_content">
+                <div class="add_movie_title">
+                    <h4>Genre</h4>
+                    <p>*max 2 genres</p>
+                </div>
+                {{form.genre}}
+            </div>
+        </div>
+
+        <div class="add_movie_box1">
+            <div class="add_movies_content">
+                <div class="add_movie_title">
+                    <h4>Director</h4>
+                </div>
+                {{form.director_name}}
+            </div>
+            <div class="add_movies_content">
+                <div class="add_movie_title">
+                    <h4>Youtube Link</h4>
+                </div>
+                {{form.youtube_link}}
+            </div>
+            <div class="add_movies_content">
+                <div class="add_movie_title">
+                    <h4>Duration</h4>
+                </div>
+                {{form.duration}}
+            </div>
+            <div class="add_movies_content">
+                <div class="add_movie_title">
+                    <h4>Cast</h4>
+                    <p>*min 5 casts</p>
+                </div>
+                {{form.casts}}
+                <a href="{% url 'movieshallapp:addcast' %}">Add Cast</a>
+            </div>
+            <div class="add_movies_content">
+                <div class="add_movie_title">
+                    <h4>Username</h4>
+                </div>
+                {{form.added_by}}
+            </div>
+<!--                   <div class="add_movies_content">-->
+<!--                       <div class="add_movie_title">-->
+<!--                          <h4>Cast2</h4>-->
+<!--                       </div>-->
+<!--                       {{form.actor2}}-->
+<!--                   </div>-->
+<!--                   <div class="add_movies_content">-->
+<!--                       <div class="add_movie_title">-->
+<!--                          <h4>Cast2 Image</h4>-->
+<!--                       </div>-->
+<!--                       {{form.actor2_img}}-->
+<!--                   </div>-->
+<!--                   <div class="add_movies_content">-->
+<!--                       <div class="add_movie_title">-->
+<!--                          <h4>Cast3</h4>-->
+<!--                       </div>-->
+<!--                       {{form.actor3}}-->
+<!--                   </div>-->
+<!--                   <div class="add_movies_content">-->
+<!--                       <div class="add_movie_title">-->
+<!--                          <h4>Cast3 Image</h4>-->
+<!--                       </div>-->
+<!--                       {{form.actor3_img}}-->
+<!--                   </div>-->
+<!--                   <div class="add_movies_content">-->
+<!--                       <div class="add_movie_title">-->
+<!--                          <h4>Cast4</h4>-->
+<!--                       </div>-->
+<!--                       {{form.actor4}}-->
+<!--                   </div>-->
+<!--                   <div class="add_movies_content">-->
+<!--                       <div class="add_movie_title">-->
+<!--                          <h4>Cast4 Image</h4>-->
+<!--                       </div>-->
+<!--                       {{form.actor4_img}}-->
+<!--                   </div>-->
+<!--                   <div class="add_movies_content">-->
+<!--                       <div class="add_movie_title">-->
+<!--                          <h4>Cast5</h4>-->
+<!--                       </div>-->
+<!--                       {{form.actor5}}-->
+<!--                   </div>-->
+<!--                   <div class="add_movies_content">-->
+<!--                       <div class="add_movie_title">-->
+<!--                          <h4>Cast5 Image</h4>-->
+<!--                       </div>-->
+<!--                       {{form.actor5_img}}-->
+<!--                   </div>-->
+
+        </div>
+        <button class="add" type="submit">Add Movies</button>
+    </form>
+<!--            <a href="{% url 'movieshallapp:index' %}">&nbsp;Save&nbsp;Changes</a>-->
+</div>
+{% endblock %}

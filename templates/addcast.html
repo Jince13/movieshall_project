@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{% endblock %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<!--   Update Movies section-->
+<div class="add_cast">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Add Cast</h1>
+        <div class="cast_page">
+            {{ form.as_p }}
+        </div>
+        <button class="cast_btn" type="submit">Add cast</button>
+    </form>
+<!--            <a href="{% url 'movieshallapp:index' %}">&nbsp;Save&nbsp;Changes</a>-->
+</div>
+{% endblock %}
